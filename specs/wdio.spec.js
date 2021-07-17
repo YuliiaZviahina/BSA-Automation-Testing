@@ -1,4 +1,4 @@
-/*
+
 const { expect } = require('chai');
 
 
@@ -115,7 +115,7 @@ describe('Sign in:', function () {
     await browser.reloadSession();
   })
 })
-*/  
+
 
 //Sign in existing user with invalid data
 
