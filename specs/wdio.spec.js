@@ -1,6 +1,7 @@
+/*
 const { expect } = require('chai');
 
-const rundomNumber = () => Date.now();
+
 
 describe('Registration:', function () {
 
@@ -28,16 +29,16 @@ describe('Registration:', function () {
     const signUpButton = await $('button');
 
     await usernameField.waitForDisplayed({ timeout: 5000 });
-    await usernameField.setValue('Marcus');
+    await usernameField.setValue('Ivan');
 
     await surnameField.waitForDisplayed({ timeout: 5000 });
-    await surnameField.setValue('Aurelius');
+    await surnameField.setValue('Groznyi');
 
     await birthDateField.waitForDisplayed({ timeout: 5000 });
-    await birthDateField.setValue('11/11/1999');
+    await birthDateField.setValue('16/11/1980');
 
     await emailField.waitForDisplayed({ timeout: 5000 });
-    await emailField.setValue(`marcus${rundomNumber()}@gmail.com`);
+    await emailField.setValue(`grozn4444@gmail.com`);
 
     await passwordField.waitForDisplayed({ timeout: 5000 });
     await passwordField.setValue('Pa55word');
@@ -77,3 +78,77 @@ describe('Registration:', function () {
     await browser.reloadSession();
   });
 });
+
+
+
+//Sign in existing user with valid login
+const { expect } = require('chai');
+
+describe('Sign in:', function () {
+  it('should be able to sign in', async function () {
+    await browser.setWindowSize(1440, 960);
+    await browser.url('/sign-in');
+
+    const emailField = await $('input[name="email"]');
+    const passwordField = await $('input[name="password"]');
+
+    const signInButton = await $('button');
+
+    await emailField.waitForDisplayed({ timeout: 5000 });
+    await emailField.setValue(`grozn4444@gmail.com`);
+    
+    await passwordField.waitForDisplayed({ timeout: 5000 });
+    await passwordField.setValue('Pa55word');
+
+    await signInButton.waitForDisplayed({ timeout: 5000 });
+    await signInButton.click();
+
+    await browser.waitUntil(
+      async function () {
+        const url = await browser.getUrl();
+        return url === 'http://46.101.234.121/sign-in';
+      },
+      { timeout: 5000 },
+  );
+  const url = await browser.getUrl();
+    expect(url).to.be.eql('http://46.101.234.121/sign-in');
+    await browser.reloadSession();
+  })
+})
+*/  
+
+//Sign in existing user with invalid data
+
+const { expect } = require('chai');
+
+describe('Sign in:', function () {
+  it('should be not able to sign in', async function () {
+    await browser.setWindowSize(1440, 960);
+    await browser.url('/sign-in');
+
+    const emailField = await $('input[name="email"]');
+    const passwordField = await $('input[name="password"]');
+
+    const signInButton = await $('button');
+
+    await emailField.waitForDisplayed({ timeout: 5000 });
+    await emailField.setValue(`@##%%@.com`);
+    
+    await passwordField.waitForDisplayed({ timeout: 5000 });
+    await passwordField.setValue('Pa55word');
+
+    await signInButton.waitForDisplayed({ timeout: 5000 });
+    await signInButton.click();
+
+    await browser.waitUntil(
+      async function () {
+        const url = await browser.getUrl();
+        return url === 'http://46.101.234.121/sign-in';
+      },
+      { timeout: 5000 },
+  );
+  const url = await browser.getUrl();
+    expect(url).to.be.eql('http://46.101.234.121/sign-in');
+    await browser.reloadSession();
+  })
+})  
